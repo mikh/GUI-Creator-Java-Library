@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JFrame method_setTitle="example gui">
+	<EditBox/>
+	<JLabel text="" />
+	<Button text="Say Hello" />	
+</JFrame>
