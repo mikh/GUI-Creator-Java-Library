@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<JFrame method_setTitle="example gui">
-	<EditBox/>
-	<JLabel text="" />
-	<Button text="Say Hello" />	
-</JFrame>
+<javax.swing.JFrame method_setTitle="String_example gui">
+	<JTextField constructor="int_20" method_setText="String_Hello World"/>
+	<JLabel method_setText="This is a label" />
+	<JButton method_setText="Say Hello" />	
+</javax.swing.JFrame>
