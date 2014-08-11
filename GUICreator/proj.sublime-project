@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"path": "src"
+		},
+		{
+			"path": ".",
+			"file_include_patterns": ["*.xml"],
+			"folder_exclude_patterns": ["*"]
+		}
+	]
+}

@@ -33,9 +33,14 @@ public class RadianceEngine extends GUIEngine{
 		
 		for(int ii = 0; ii < rootList.size(); ii++){
 			parser.setWalkNode(rootList.get(ii));
-			parser.getNodeData(children, attributes, leaves);
+			ArrayList<ArrayList<XMLNode>> pack_node = parser.getNodeData();
+			children = pack_node.get(0);
+			attributes = pack_node.get(1);
+			leaves = pack_node.get(2);
 			ArrayList<String> attrib = new ArrayList<String>(), value = new ArrayList<String>();
-			parser.getAttributes(rootList.get(ii), attrib, value);
+			ArrayList<ArrayList<String>> pack_string = parser.getAttributes(rootList.get(ii));
+			attrib = pack_string.get(0);
+			value = pack_string.get(1);
 			
 			int constructor = -1;
 			String constructor_values = null;
@@ -51,6 +56,14 @@ public class RadianceEngine extends GUIEngine{
 				guiConstructionAlgorithm.add("constructorargs_" + rootList.get(ii).text + "_" + str_output);
 			} else
 				guiConstructionAlgorithm.add("constructor_" + rootList.get(ii).text);
+			
+			
+			for(int jj = 0; jj < attrib.size(); jj++){
+				int act = getAction(attrib.get(jj));
+				if(act != 0){
+					System.out.println(str_output);
+				}
+			}
 		}
 		
 		StrOps.printArrayList(guiConstructionAlgorithm);
@@ -72,6 +85,8 @@ public class RadianceEngine extends GUIEngine{
 				} catch (IllegalAccessException e) {
 					System.out.println(String.format("[ERROR] cantrip.guicreator.radianceengine error :: illegal access on class creation of %s", str_output));
 				}
+			} else if(type == 1){
+				
 			}
 		}
 	}
