@@ -3,4 +3,5 @@
 	<JTextField constructor="int_20" method_setText="String_Hello World"/>
 	<JLabel method_setText="This is a label" />
 	<JButton method_setText="Say Hello" />	
+	<!--example value would be value_valuename="value_type=value"-->
 </javax.swing.JFrame>
