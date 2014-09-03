@@ -14,5 +14,26 @@ public class GUI_Component {
 		type = n_type;
 		identifier = n_ident;
 	}
+	
+	public String print(){
+		String s = "";
+		s += String.format("type= %s \t identifier= %s\n", type, identifier);
+		s += "Arguments:\n";
+		for(StringPair sp : arguments)
+			s += String.format("%s %s\t", sp.first, sp.second);
+		s += "\nAttributes:\n";
+		for(GUI_Component g : attributes)
+			s += String.format("%s %s\t", g.type, g.identifier);
+		s += "\nChildren:\n";
+		for(GUI_Component g : children)
+			s += String.format("%s %s\t", g.type, g.identifier);
+		s += "\n\n\n";
+		
+		for(GUI_Component g : attributes)
+			s += g.print();
+		for(GUI_Component g : children)
+			s += g.print();
+		return s;
+	}
 }
 

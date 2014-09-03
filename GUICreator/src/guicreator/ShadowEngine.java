@@ -22,9 +22,8 @@ public class ShadowEngine extends GUIEngine{
 			parseComponent(GUI_component_root_list.get(GUI_component_root_list.size()-1), node);
 		}
 		
-		for(int ii = 0; ii < rootList.size(); ii++){
-			printAllTags(rootList.get(ii), "");
-		}
+		for(GUI_Component g : GUI_component_root_list)
+			System.out.println(g.print());
 		
 	}
 	
@@ -35,22 +34,42 @@ public class ShadowEngine extends GUIEngine{
 			if(t.equals("constructor")){
 				ArrayList<String> leaves = nn.getLeaves(nn);
 				for(String s : leaves){
+					s = StrOps.removeQuotes(s);
 					int index = StrOps.findNonDelimitedPatternAfterIndex(s, "_", 0);
-					comp.arguments.add(new StringPair(s.substring(0,index), s.substring(index+1)));
+					if(index == -1)
+						System.out.println("[WARNING] gui_creator.ShadowEngine.parseComponent warning:: leaf \"" + s + "\" has not underscore. Ignoring...");
+					else
+						comp.arguments.add(new StringPair(s.substring(0,index), s.substring(index+1)));
 				}
 			} else{
+				t = StrOps.removeQuotes(t);
 				int index = StrOps.findNonDelimitedPatternAfterIndex(t, "_", 0);
+				if(index == -1)
+					System.out.println("[WARNING] gui_creator.ShadowEngine.parseComponent warning:: leaf \"" + t + "\" has not underscore. Error creating GUI_Component.");
 				String type = t.substring(0, index);
 				String name = t.substring(index+1);
 				GUI_Component newComp = new GUI_Component(type, name);
-				if(type.equals("method")){		/*** DIstinction b/w method and value not necessary, operations performed are identical. Only good for the warning statment ***/
-					
-				} else if(type.equals("value")){
-					
-				} else{
+				ArrayList<String> newCompArguments = nn.getLeaves(nn);
+				for(String s : newCompArguments){
+					s = StrOps.removeQuotes(s);
+					index = StrOps.findNonDelimitedPatternAfterIndex(s, "_", 0);
+					if(index == -1)
+						System.out.println("[WARNING] gui_creator.ShadowEngine.parseComponent warning:: leaf \"" + s + "\" has not underscore. Ignoring...");
+					else
+						newComp.arguments.add(new StringPair(s.substring(0, index), s.substring(index+1)));
+				}
+				comp.attributes.add(newComp);
+				if(!type.equals("method") && !type.equals("value")){
 					System.out.println("[WARNING] gui_creator.ShadowEngine.parseComponent warning:: type " + type + " is not recognized. Ignoring...");
 				}
 			}
+		}
+		
+		ArrayList<XMLNode> children = node.getTags();
+		for(XMLNode nn : children){
+			GUI_Component newComp = new GUI_Component("object", node.text);
+			parseComponent(newComp, nn);
+			comp.children.add(newComp);
 		}
 	}
 	

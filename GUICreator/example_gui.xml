@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <javax.swing.JFrame method_setTitle="String_example gui">
-	<JTextField constructor="int_20" method_setText="String_Hello World"/>
-	<JLabel method_setText="This is a label" />
-	<JButton method_setText="Say Hello" />	
+	<javax.swing.JTextField constructor="int_20" method_setText="String_Hello World"/>
+	<javax.swing.JLabel method_setText="String_This is a label" />
+	<javax.swing.JButton method_setText="String_Say Hello" />	
 	<!--example value would be value_valuename="value_type=value"-->
 </javax.swing.JFrame>
